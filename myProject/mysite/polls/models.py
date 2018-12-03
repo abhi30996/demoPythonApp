@@ -9,6 +9,12 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def as_json(self):
+        return dict(
+            question_text=self.question_text,
+            pub_date=self.pub_date
+        )
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -17,3 +23,11 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    def as_json(self):
+        return dict(
+            choice_id=self.id,
+            question=self.question,
+            choice_text=self.choice_text,
+            votes=self.votes
+        )
