@@ -26,8 +26,7 @@ class Choice(models.Model):
 
     def as_json(self):
         return dict(
-            choice_id=self.id,
-            question=self.question,
+            id = self.id,
             choice_text=self.choice_text,
             votes=self.votes
         )

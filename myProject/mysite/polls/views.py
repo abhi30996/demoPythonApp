@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.http import Http404
 from .models import Question, Choice
+import json
 
 
 # Create your views here.
@@ -42,5 +43,8 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        result = selected_choice.as_json()
-        return HttpResponseRedirect(json.PythonSerializer.get_dump_object(result.as_json()), content_type="application/json")
+        choice = selected_choice
+        result = choice.as_json()
+
+        return HttpResponse(json.dumps(list(dict(result).items())),
+                            content_type="application/json")
